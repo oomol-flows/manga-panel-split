@@ -1,0 +1,9 @@
+version: 0.0.1
+scripts:
+  bootstrap: |
+    npm install
+    poetry install --no-root
+name: manga-panel-split
+displayName: "%display-name%"
+description: "%description%"
+repository: https://github.com/oomol-flows/manga-panel-split.git

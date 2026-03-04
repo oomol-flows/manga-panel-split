@@ -1,0 +1,53 @@
+inputs_def:
+  - handle: comic_image
+    description: "Comic/manga image file path to process"
+    json_schema:
+      type: string
+      ui:widget: file
+      ui:options:
+        filters:
+          - name: Images
+            extensions:
+              - jpg
+              - jpeg
+              - png
+              - webp
+    nullable: false
+
+  - handle: output_dir
+    description: "Output directory path for extracted panels (defaults to session
+      directory)"
+    json_schema:
+      type: string
+      ui:widget: dir
+    nullable: true
+    value:
+
+
+outputs_def:
+  - handle: panel_images
+    description: "Array of extracted panel image file paths in reading order"
+    json_schema:
+      type: array
+      items:
+        type: string
+
+  - handle: panel_count
+    description: "Total number of detected panels"
+    json_schema:
+      type: number
+
+  - handle: visualization
+    description: "Visualization image path showing panel detection bounding boxes"
+    json_schema:
+      type: string
+
+executor:
+  name: python
+  options:
+    entry: __init__.py
+    spawn: false
+
+title: "Extract Comic Panels"
+icon: ":carbon:grid:"
+description: "Detects and extracts comic panels using MAGI AI in correct reading order"

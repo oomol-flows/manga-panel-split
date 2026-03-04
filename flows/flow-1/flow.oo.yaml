@@ -1,0 +1,11 @@
+title: "Test Comic Panel Extraction"
+description: "Test flow to verify comic panel extraction functionality"
+
+nodes:
+  - node_id: extract_panels#1
+    task: self::extract-comic-panels
+    inputs_from:
+      - handle: comic_image
+        value: "/oomol-driver/oomol-storage/manga/test.jpeg"
+      - handle: output_dir
+        value:
