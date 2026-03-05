@@ -43,8 +43,8 @@ async def main(params: Inputs, context: Context) -> Outputs:
 
     context.report_progress(20)
 
-    # Load MAGI model
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+    # Load MAGI model (force CPU mode, cuda lib is too large, can not start on cloud)
+    device = "cpu"
     model = AutoModel.from_pretrained("ragavsachdeva/magi", trust_remote_code=True)
     model = model.to(device)
 
