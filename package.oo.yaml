@@ -1,15 +1,17 @@
-version: 0.0.8
+version: 0.0.15
 scripts:
   bootstrap: |
     npm install
-    # Install other dependencies via poetry first (excluding torch)
-    poetry install --no-root
-    # Install PyTorch CPU version from official PyTorch wheel index
+    # Install PyTorch CPU version FIRST to prevent CUDA dependencies
     # This avoids ~12GB CUDA dependencies and uses only ~200MB CPU version
-    pip install torch==2.10.0+cpu torchvision==0.25.0+cpu --index-url https://download.pytorch.org/whl/cpu --force-reinstall
+    pip install torch==2.10.0+cpu torchvision==0.25.0+cpu --index-url https://download.pytorch.org/whl/cpu
+    # Install timm after torch (will use the CPU torch above)
+    pip install timm==1.0.25 --no-deps
+    # Install other dependencies via poetry (no torch/timm to avoid CUDA)
+    poetry install --no-root
 name: manga-panel-split
 displayName: "%display-name%"
 description: "%description%"
 repository: https://github.com/oomol-flows/manga-panel-split.git
 icon: ./icon.png
-releaseNotes: "fix: need einops"
+releaseNotes: "feat: support image url"

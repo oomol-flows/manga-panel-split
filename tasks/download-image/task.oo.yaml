@@ -1,0 +1,36 @@
+inputs_def:
+  - handle: image_url
+    description: "URL of the image to download"
+    json_schema:
+      type: string
+      format: uri
+    nullable: false
+
+  - handle: output_dir
+    description: "Output directory for downloaded image (defaults to session directory)"
+    json_schema:
+      type: string
+      ui:widget: dir
+    nullable: true
+    value:
+
+
+outputs_def:
+  - handle: image_path
+    description: "Local file path of the downloaded image"
+    json_schema:
+      type: string
+
+  - handle: filename
+    description: "Filename of the downloaded image"
+    json_schema:
+      type: string
+
+executor:
+  name: python
+  options:
+    entry: __init__.py
+title: "Download Image"
+icon: ":carbon:download:"
+description: "Download image from URL to local file"
+private: true

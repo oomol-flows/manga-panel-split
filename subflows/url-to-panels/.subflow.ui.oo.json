@@ -1,0 +1,38 @@
+{
+  "nodes": {
+    "download_image#1": {
+      "rfNode": {
+        "position": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    "extract_panels#1": {
+      "rfNode": {
+        "position": {
+          "x": 600,
+          "y": 0
+        }
+      }
+    }
+  },
+  "pseudoNodes": {
+    "input": {
+      "rfNode": {
+        "position": {
+          "x": 0,
+          "y": -500
+        }
+      }
+    },
+    "output": {
+      "rfNode": {
+        "position": {
+          "x": 1000,
+          "y": -500
+        }
+      }
+    }
+  }
+}

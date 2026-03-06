@@ -1,0 +1,87 @@
+inputs_def:
+  - handle: image_url
+    description: "URL of the comic/manga image to process"
+    json_schema:
+      type: string
+      format: uri
+    nullable: false
+
+  - handle: output_dir
+    description: "Output directory for downloaded image and extracted panels
+      (defaults to session directory)"
+    json_schema:
+      type: string
+      ui:widget: dir
+    nullable: true
+    value:
+
+
+outputs_def:
+  - handle: panel_images
+    description: "Array of extracted panel image file paths in reading order"
+    json_schema:
+      type: array
+      items:
+        type: string
+
+  - handle: panel_count
+    description: "Total number of detected panels"
+    json_schema:
+      type: number
+
+  - handle: visualization
+    description: "Visualization image path showing panel detection bounding boxes"
+    json_schema:
+      type: string
+
+  - handle: downloaded_image
+    description: "Local file path of the downloaded image"
+    json_schema:
+      type: string
+
+outputs_from:
+  - handle: panel_images
+    from_node:
+      - node_id: extract_panels#1
+        output_handle: panel_images
+
+  - handle: panel_count
+    from_node:
+      - node_id: extract_panels#1
+        output_handle: panel_count
+
+  - handle: visualization
+    from_node:
+      - node_id: extract_panels#1
+        output_handle: visualization
+
+  - handle: downloaded_image
+    from_node:
+      - node_id: download_image#1
+        output_handle: image_path
+
+nodes:
+  - node_id: download_image#1
+    task: self::download-image
+    inputs_from:
+      - handle: image_url
+        from_flow:
+          - input_handle: image_url
+      - handle: output_dir
+        from_flow:
+          - input_handle: output_dir
+
+  - node_id: extract_panels#1
+    task: self::extract-comic-panels
+    inputs_from:
+      - handle: comic_image
+        from_node:
+          - node_id: download_image#1
+            output_handle: image_path
+      - handle: output_dir
+        from_flow:
+          - input_handle: output_dir
+
+title: "URL to Comic Panels"
+icon: ":carbon:image:"
+description: "Download image from URL and extract comic panels"

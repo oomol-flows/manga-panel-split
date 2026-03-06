@@ -1,0 +1,12 @@
+title: "Test URL to Panels Subflow"
+description: "Test flow for url-to-panels subflow"
+
+nodes:
+  - node_id: url_to_panels#1
+    subflow: self::url-to-panels
+    inputs_from:
+      - handle: image_url
+        value: "https://fusion.oomol.com/file-upload/019343aa-c609-7498-b541-906f2860a1\
+          e2/019cc1c3-6641-7000-ae8f-7a01c612f4a3.jpeg"
+      - handle: output_dir
+        value:

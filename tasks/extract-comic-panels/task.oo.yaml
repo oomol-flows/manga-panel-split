@@ -51,3 +51,4 @@ executor:
 title: "Extract Comic Panels"
 icon: ":carbon:grid:"
 description: "Detects and extracts comic panels using MAGI AI in correct reading order"
+private: true
